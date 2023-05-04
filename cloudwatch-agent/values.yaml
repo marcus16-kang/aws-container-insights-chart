@@ -1,0 +1,59 @@
+clusterName: ""
+
+image:
+  repository: public.ecr.aws/cloudwatch-agent/cloudwatch-agent
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "1.247357.0b252275"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "cloudwatch-agent"
+
+clusterRole:
+  name: "cloudwatch-agent-role"
+
+clusterRoleBinding:
+  name: "cloudwatch-agent-role-binding"
+
+configMap:
+  name: "cwagentconfig"
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 200Mi
+  requests:
+    cpu: 200m
+    memory: 200Mi
+
+nodeSelector:
+  kubernetes.io/os: linux
+  # key1: value1
+  # key2: value2
+
+tolerations: []
+  # - key: "key1"         # taint key
+  #     value: "value1"     # taint value
+  #     operator: "Equal"
+  #     effect: "NoSchedule"
+
+affinity: {}
