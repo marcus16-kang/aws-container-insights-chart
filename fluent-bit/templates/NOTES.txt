@@ -1,3 +1,0 @@
-You can get fluent bit using this command:
-
-  kubectl get pods -n {{ .Release.Namespace }}
