@@ -46,32 +46,32 @@ spec:
             - name: AWS_REGION
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.clusterInfo.configMapName }}
+                  name: {{ include "fluent-bit.fullname" . }}-clusterinfo
                   key: logs.region
             - name: CLUSTER_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.clusterInfo.configMapName }}
+                  name: {{ include "fluent-bit.fullname" . }}-clusterinfo
                   key: cluster.name
             - name: HTTP_SERVER
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.clusterInfo.configMapName }}
+                  name: {{ include "fluent-bit.fullname" . }}-clusterinfo
                   key: http.server
             - name: HTTP_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.clusterInfo.configMapName }}
+                  name: {{ include "fluent-bit.fullname" . }}-clusterinfo
                   key: http.port
             - name: READ_FROM_HEAD
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.clusterInfo.configMapName }}
+                  name: {{ include "fluent-bit.fullname" . }}-clusterinfo
                   key: read.head
             - name: READ_FROM_TAIL
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.clusterInfo.configMapName }}
+                  name: {{ include "fluent-bit.fullname" . }}-clusterinfo
                   key: read.tail
             - name: HOST_NAME
               valueFrom:
@@ -133,7 +133,7 @@ spec:
             path: /var/lib/docker/containers
         - name: fluent-bit-config
           configMap:
-            name: {{ .Values.fluentBitConfig.configMapName }}
+            name: {{ include "fluent-bit.fullname" . }}-config
         - name: runlogjournal
           hostPath:
             path: /run/log/journal

@@ -1,0 +1,45 @@
+apiVersion: v1
+entries:
+  cloudwatch-agent:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-05-04T20:03:57.0293254+09:00"
+    description: A Helm chart for Kubernetes
+    digest: 00898172fffaea146fad90349dc1e762b5a4c94b2bc37999af5dffdc284695c2
+    name: cloudwatch-agent
+    type: application
+    urls:
+    - cloudwatch-agent-0.1.0.tgz
+    version: 0.1.0
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-05-04T20:03:57.030933+09:00"
+    description: A Helm chart for Kubernetes
+    digest: 27ba143f6fe765db32b984f9ad8729ebcd7384b770f403586253abdd33b84b8e
+    name: cloudwatch-agent
+    type: application
+    urls:
+    - cloudwatch-agent/cloudwatch-agent-0.1.0.tgz
+    version: 0.1.0
+  fluent-bit:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-05-04T20:03:57.0298328+09:00"
+    description: A Helm chart for Kubernetes
+    digest: a5a1da7b94f792df216b35a31d37c1e3f7d5fa175f0a42cf998d375f9b1d80a0
+    name: fluent-bit
+    type: application
+    urls:
+    - fluent-bit-0.1.0.tgz
+    version: 0.1.0
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-05-04T20:03:57.0314417+09:00"
+    description: A Helm chart for Kubernetes
+    digest: 784965b9e1eb17438c846b8a486ffafb92bd37cb0bac1dfe194ced22d4bed391
+    name: fluent-bit
+    type: application
+    urls:
+    - fluent-bit/fluent-bit-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-05-04T20:03:57.0287963+09:00"

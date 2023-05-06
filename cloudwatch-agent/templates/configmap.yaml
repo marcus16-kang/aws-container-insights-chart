@@ -1,8 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.configMap.name }}
+  name: {{ include "cloudwatch-agent.fullname" . }}
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "cloudwatch-agent.labels" . | nindent 4 }}
 data:
   cwagentconfig.json: |
     {

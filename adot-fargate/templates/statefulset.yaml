@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "adot-fargate.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "adot-fargate.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "adot-fargate.selectorLabels" . | nindent 6 }}
+      app: aws-adot
+      component: adot-collector
+  serviceName: {{ include "adot-fargate.fullname" . }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "adot-fargate.selectorLabels" . | nindent 8 }}
+        app: aws-adot
+        component: adot-collector
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "adot-fargate.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - "/awscollector"
+            - "--config=/conf/adot-collector-config.yaml"
+          env:
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: "ClusterName={{ .Values.clusterName }}"
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: adot-collector-config-volume
+              mountPath: /conf
+      volumes:
+        - name: adot-collector-config-volume
+          configMap:
+            name: {{ include "adot-fargate.fullname" . }}
+            items:
+              - key: adot-collector-config
+                path: adot-collector-config.yaml
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

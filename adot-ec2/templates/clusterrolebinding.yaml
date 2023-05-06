@@ -1,14 +1,14 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ include "cloudwatch-agent.fullname" . }}
+  name: {{ include "adot-ec2.fullname" . }}
   labels:
-    {{- include "cloudwatch-agent.labels" . | nindent 4 }}
+    {{- include "adot-ec2.labels" . | nindent 4 }}
 subjects:
   - kind: ServiceAccount
-    name: {{ include "cloudwatch-agent.serviceAccountName" . }}
+    name: {{ include "adot-ec2.serviceAccountName" . }}
     namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
-  name: {{ include "cloudwatch-agent.fullname" . }}
+  name: {{ include "adot-ec2.fullname" . }}
   apiGroup: rbac.authorization.k8s.io

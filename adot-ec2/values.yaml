@@ -1,9 +1,7 @@
-clusterName: ""
-
 image:
-  repository: public.ecr.aws/cloudwatch-agent/cloudwatch-agent
-  pullPolicy: IfNotPresent
-  tag: "1.247357.0b252275"
+  repository: amazon/aws-otel-collector
+  pullPolicy: Always
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -12,7 +10,7 @@ fullnameOverride: ""
 serviceAccount:
   create: true
   annotations: {}
-  name: "cloudwatch-agent"
+  name: "aws-otel-sa"
 
 podAnnotations: {}
 
@@ -35,15 +33,8 @@ resources:
     cpu: 200m
     memory: 200Mi
 
-nodeSelector:
-  kubernetes.io/os: linux
-  # key1: value1
-  # key2: value2
+nodeSelector: {}
 
 tolerations: []
-  # - key: "key1"         # taint key
-  #     value: "value1"     # taint value
-  #     operator: "Equal"
-  #     effect: "NoSchedule"
 
 affinity: {}

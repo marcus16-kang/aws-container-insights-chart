@@ -1,5 +1,4 @@
 clusterInfo:
-  configMapName: "fluent-bit-cluster-info"
   clusterName: "" # [REQUIRED]
   region: ""      # [REQUIRED]
   fluentBitHttpServer: "On"
@@ -8,7 +7,6 @@ clusterInfo:
   fluentBitReadTail: "On"
 
 fluentBitConfig:
-  configMapName: "fluent-bit-config"
   extraApplicationConfig: ""
   # You can add extra logging configuration like this
   # extraApplicationConfig: |
@@ -56,13 +54,7 @@ fullnameOverride: ""
 serviceAccount:
   create: true
   annotations: {}
-  name: "cloudwatch-agent"
-
-clusterRole:
-  name: "cloudwatch-agent-role"
-
-clusterRoleBinding:
-  name: "cloudwatch-agent-role-binding"
+  name: "fluent-bit"
 
 podAnnotations: {}
 
